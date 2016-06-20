@@ -1,0 +1,30 @@
+{
+  "name": "react-native-multiple-image-picker",
+  "version": "0.0.1",
+  "description": "React Native Multiple Image Picker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liaoyuan-io/react-native-multiple-image-picker.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "react-native",
+    "image",
+    "picker",
+    "multiple"
+  ],
+  "author": "Tong Shen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/liaoyuan-io/react-native-multiple-image-picker/issues"
+  },
+  "homepage": "https://github.com/liaoyuan-io/react-native-multiple-image-picker#readme",
+  "peerDependencies": {
+    "react-native": ">=0.26.0"
+  }
+}
