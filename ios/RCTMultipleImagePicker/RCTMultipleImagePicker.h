@@ -10,7 +10,7 @@
 #import "RCTBridgeModule.h"
 #import "RCTConvert.h"
 #import "RCTLog.h"
-#import <TZImagePickerController/TZImagePickerController.h>
+#import "TZImagePickerController.h"
 
 
 @interface RCTMultipleImagePicker : NSObject <RCTBridgeModule, TZImagePickerControllerDelegate>

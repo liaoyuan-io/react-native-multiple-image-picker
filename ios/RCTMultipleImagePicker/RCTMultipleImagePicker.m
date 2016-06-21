@@ -39,7 +39,7 @@ RCT_EXPORT_METHOD(launchImageGallery:(NSDictionary *)options resolver:(RCTPromis
     NSString *filePathBase = [[paths objectAtIndex:0] stringByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]];
     
     [photos enumerateObjectsUsingBlock:^(UIImage * _Nonnull image, NSUInteger index, BOOL * _Nonnull stop) {
-        NSString *path = [filePathBase stringByAppendingPathComponent:[NSString stringWithFormat: @"%d", (int)index]];
+        NSString *path = [filePathBase stringByAppendingPathComponent:[NSString stringWithFormat: @"%d.jpg", (int)index]];
         [UIImageJPEGRepresentation(image, 1.0) writeToFile:path atomically:YES];
         [result addObject:path];
     }];

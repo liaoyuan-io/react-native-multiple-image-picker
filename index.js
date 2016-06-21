@@ -4,6 +4,6 @@
 
 'use strict'
 
-const { NativeModules } = require('react-native');
+import { NativeModules } from 'react-native';
 
-module.exports = NativeModules.RCTMultipleImagePicker;
+export default module.exports = NativeModules.MultipleImagePicker;
