@@ -15,7 +15,8 @@ RCT_EXPORT_MODULE();
 -(id)init {
     self = [super init];
     if(self) {
-        self.assets = [[NSMutableDictionary alloc] init];
+        self.assetsFromPath = [[NSMutableDictionary alloc] init];
+        self.assetsToPath = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -28,7 +29,7 @@ RCT_EXPORT_METHOD(launchImageGallery:(NSDictionary *)options resolver:(RCTPromis
     NSMutableArray *selectedAssets = [[NSMutableArray alloc] init];
     [selectedPaths enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSString *path = [RCTConvert NSString:obj];
-        [selectedAssets addObject:[self.assets objectForKey:path]];
+        [selectedAssets addObject:[self.assetsFromPath objectForKey:path]];
     }];
     
     TZImagePickerController *imagePickerController = [[TZImagePickerController alloc] initWithMaxImagesCount:maxImagesCount delegate:self];
@@ -64,10 +65,15 @@ RCT_EXPORT_METHOD(launchImageGallery:(NSDictionary *)options resolver:(RCTPromis
     }
     
     [photos enumerateObjectsUsingBlock:^(UIImage * _Nonnull image, NSUInteger index, BOOL * _Nonnull stop) {
-        NSString *path = [filePathBase stringByAppendingPathComponent:[NSString stringWithFormat: @"%d.jpg", (int)index]];
-        [UIImageJPEGRepresentation(image, 1.0) writeToFile:path atomically:YES];
+        PHAsset *asset = [assets objectAtIndex:index];
+        NSString *path = [self.assetsToPath objectForKey:asset];
+        if(path == nil) {
+            path = [filePathBase stringByAppendingPathComponent:[NSString stringWithFormat: @"%d.jpg", (int)index]];
+            [UIImageJPEGRepresentation(image, 1.0) writeToFile:path atomically:YES];
+            [self.assetsFromPath setObject:asset forKey:path];
+            [self.assetsToPath setObject:path forKey:asset];
+        }
         [result addObject:path];
-        [self.assets setObject:[assets objectAtIndex:index] forKey:path];
     }];
     
     self.resolve(result);
