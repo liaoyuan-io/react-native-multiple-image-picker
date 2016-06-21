@@ -1,6 +1,6 @@
 {
   "name": "react-native-multiple-image-picker",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "React Native Multiple Image Picker",
   "main": "index.js",
   "scripts": {

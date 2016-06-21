@@ -4,6 +4,6 @@ project 'RCTMultipleImagePicker.xcodeproj'
 # platform :ios, '9.0'
 
 target 'RCTMultipleImagePicker' do
-  pod 'TZImagePickerController', '1.4.5'
+  pod 'TZImagePickerController', '1.5.0'
   pod 'React', :path => '../../react-native'
 end
