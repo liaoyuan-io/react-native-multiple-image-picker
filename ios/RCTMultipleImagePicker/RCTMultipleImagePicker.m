@@ -34,6 +34,7 @@ RCT_EXPORT_METHOD(launchImageGallery:(NSDictionary *)options resolver:(RCTPromis
     
     TZImagePickerController *imagePickerController = [[TZImagePickerController alloc] initWithMaxImagesCount:maxImagesCount delegate:self];
     imagePickerController.allowPickingOriginalPhoto = NO;
+    imagePickerController.allowPickingVideo = NO;
     imagePickerController.selectedAssets = selectedAssets;
 
     UIViewController *root = [[[[UIApplication sharedApplication] delegate]
