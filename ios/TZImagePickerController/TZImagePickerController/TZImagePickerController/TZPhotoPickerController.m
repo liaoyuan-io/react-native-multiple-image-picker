@@ -337,6 +337,7 @@ static CGSize AssetGridThumbnailSize;
             for (TZAssetModel *model_item in selectedModels) {
                 if ([[[TZImageManager manager] getAssetIdentifier:model.asset] isEqualToString:[[TZImageManager manager] getAssetIdentifier:model_item.asset]]) {
                     [tzImagePickerVc.selectedModels removeObject:model_item];
+                    break;
                 }
             }
             [weakSelf refreshBottomToolBarStatus];

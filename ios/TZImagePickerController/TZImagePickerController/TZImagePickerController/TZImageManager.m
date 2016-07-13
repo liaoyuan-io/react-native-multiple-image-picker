@@ -27,7 +27,7 @@ static CGFloat TZScreenScale;
     dispatch_once(&onceToken, ^{
         manager = [[self alloc] init];
         manager.cachingImageManager = [[PHCachingImageManager alloc] init];
-        manager.cachingImageManager.allowsCachingHighQualityImages = NO;
+        manager.cachingImageManager.allowsCachingHighQualityImages = YES;
         
         TZScreenWidth = [UIScreen mainScreen].bounds.size.width;
         // 测试发现，如果scale在plus真机上取到3.0，内存会增大特别多。故这里写死成2.0
@@ -113,7 +113,7 @@ static CGFloat TZScreenScale;
             PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:collection options:option];
             if (fetchResult.count < 1) continue;
             if ([collection.localizedTitle containsString:@"Deleted"] || [collection.localizedTitle isEqualToString:@"最近删除"]) continue;
-            if ([collection.localizedTitle isEqualToString:@"Camera Roll"] || [collection.localizedTitle isEqualToString:@"相机胶卷"]) {
+            if ([collection.localizedTitle isEqualToString:@"Camera Roll"] || [collection.localizedTitle isEqualToString:@"相机胶卷"] || [collection.localizedTitle isEqualToString:@"所有照片"] || [collection.localizedTitle isEqualToString:@"All Photos"]) {
                 [albumArr insertObject:[self modelWithResult:fetchResult name:collection.localizedTitle] atIndex:0];
             } else {
                 [albumArr addObject:[self modelWithResult:fetchResult name:collection.localizedTitle]];
@@ -125,7 +125,11 @@ static CGFloat TZScreenScale;
             PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:collection options:option];
             if (fetchResult.count < 1) continue;
             if ([collection.localizedTitle isEqualToString:@"My Photo Stream"] || [collection.localizedTitle isEqualToString:@"我的照片流"]) {
-                [albumArr insertObject:[self modelWithResult:fetchResult name:collection.localizedTitle] atIndex:1];
+                if (albumArr.count) {
+                    [albumArr insertObject:[self modelWithResult:fetchResult name:collection.localizedTitle] atIndex:1];
+                } else {
+                    [albumArr addObject:[self modelWithResult:fetchResult name:collection.localizedTitle]];
+                }
             } else {
                 [albumArr addObject:[self modelWithResult:fetchResult name:collection.localizedTitle]];
             }
@@ -138,10 +142,14 @@ static CGFloat TZScreenScale;
             }
             if ([group numberOfAssets] < 1) return;
             NSString *name = [group valueForProperty:ALAssetsGroupPropertyName];
-            if ([name isEqualToString:@"Camera Roll"] || [name isEqualToString:@"相机胶卷"]) {
+            if ([name isEqualToString:@"Camera Roll"] || [name isEqualToString:@"相机胶卷"] || [name isEqualToString:@"所有照片"] || [name isEqualToString:@"All Photos"]) {
                 [albumArr insertObject:[self modelWithResult:group name:name] atIndex:0];
             } else if ([name isEqualToString:@"My Photo Stream"] || [name isEqualToString:@"我的照片流"]) {
-                [albumArr insertObject:[self modelWithResult:group name:name] atIndex:1];
+                if (albumArr.count) {
+                    [albumArr insertObject:[self modelWithResult:group name:name] atIndex:1];
+                } else {
+                    [albumArr addObject:[self modelWithResult:group name:name]];
+                }
             } else {
                 [albumArr addObject:[self modelWithResult:group name:name]];
             }
@@ -216,10 +224,18 @@ static CGFloat TZScreenScale;
 }
 
 ///  Get asset at index 获得下标为index的单个照片
+///  if index beyond bounds, return nil in callback 果索引越界, 在回调中返回 nil
 - (void)getAssetFromFetchResult:(id)result atIndex:(NSInteger)index allowPickingVideo:(BOOL)allowPickingVideo allowPickingImage:(BOOL)allowPickingImage completion:(void (^)(TZAssetModel *))completion {
     if ([result isKindOfClass:[PHFetchResult class]]) {
         PHFetchResult *fetchResult = (PHFetchResult *)result;
-        PHAsset *asset = fetchResult[index];
+        PHAsset *asset;
+        @try {
+            asset = fetchResult[index];
+        }
+        @catch (NSException* e) {
+            if (completion) completion(nil);
+            return;
+        }
         
         TZAssetModelMediaType type = TZAssetModelMediaTypePhoto;
         if (asset.mediaType == PHAssetMediaTypeVideo)      type = TZAssetModelMediaTypeVideo;
@@ -243,26 +259,36 @@ static CGFloat TZScreenScale;
             [group setAssetsFilter:[ALAssetsFilter allPhotos]];
         }
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:index];
-        [group enumerateAssetsAtIndexes:indexSet options:NSEnumerationConcurrent usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-            TZAssetModel *model;
-            TZAssetModelMediaType type = TZAssetModelMediaTypePhoto;
-            if (!allowPickingVideo){
-                model = [TZAssetModel modelWithAsset:result type:type];
+        
+        @try {
+            [group enumerateAssetsAtIndexes:indexSet options:NSEnumerationConcurrent usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+                
+                if (!result) return;
+                
+                TZAssetModel *model;
+                TZAssetModelMediaType type = TZAssetModelMediaTypePhoto;
+                if (!allowPickingVideo){
+                    model = [TZAssetModel modelWithAsset:result type:type];
+                    if (completion) completion(model);
+                    return;
+                }
+                /// Allow picking video
+                if ([[result valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
+                    type = TZAssetModelMediaTypeVideo;
+                    NSTimeInterval duration = [[result valueForProperty:ALAssetPropertyDuration] integerValue];
+                    NSString *timeLength = [NSString stringWithFormat:@"%0.0f",duration];
+                    timeLength = [self getNewTimeFromDurationSecond:timeLength.integerValue];
+                    model = [TZAssetModel modelWithAsset:result type:type timeLength:timeLength];
+                } else {
+                    model = [TZAssetModel modelWithAsset:result type:type];
+                }
                 if (completion) completion(model);
-                return;
-            }
-            /// Allow picking video
-            if ([[result valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypeVideo]) {
-                type = TZAssetModelMediaTypeVideo;
-                NSTimeInterval duration = [[result valueForProperty:ALAssetPropertyDuration] integerValue];
-                NSString *timeLength = [NSString stringWithFormat:@"%0.0f",duration];
-                timeLength = [self getNewTimeFromDurationSecond:timeLength.integerValue];
-                model = [TZAssetModel modelWithAsset:result type:type timeLength:timeLength];
-            } else {
-                model = [TZAssetModel modelWithAsset:result type:type];
-            }
-            if (completion) completion(model);
-        }];
+            }];
+
+        }
+        @catch (NSException* e) {
+            if (completion) completion(nil);
+        }
     }
 }
 
@@ -491,7 +517,7 @@ static CGFloat TZScreenScale;
 
 #pragma mark - Export video
 
-/// Export Video / 导出视频，暂仅仅支持iOS8.0+
+/// Export Video / 导出视频
 - (void)getVideoOutputPathWithAsset:(id)asset completion:(void (^)(NSString *outputPath))completion {
     if ([asset isKindOfClass:[PHAsset class]]) {
         PHVideoRequestOptions* options = [[PHVideoRequestOptions alloc] init];
@@ -500,45 +526,67 @@ static CGFloat TZScreenScale;
         options.networkAccessAllowed = YES;
         [[PHImageManager defaultManager] requestAVAssetForVideo:asset options:options resultHandler:^(AVAsset* avasset, AVAudioMix* audioMix, NSDictionary* info){
             // NSLog(@"Info:\n%@",info);
-            AVURLAsset* myAsset = (AVURLAsset*)avasset;
+            AVURLAsset *videoAsset = (AVURLAsset*)avasset;
             // NSLog(@"AVAsset URL: %@",myAsset.URL);
-            
-            NSArray *compatiblePresets = [AVAssetExportSession exportPresetsCompatibleWithAsset:myAsset];
-            // NSLog(@"%@",compatiblePresets);
-            
-            if ([compatiblePresets containsObject:AVAssetExportPresetHighestQuality]) {
-                AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:myAsset presetName:AVAssetExportPresetMediumQuality];
-                NSDateFormatter *formater = [[NSDateFormatter alloc] init];
-                [formater setDateFormat:@"yyyy-MM-dd-HH:mm:ss"];
-                NSString *outputPath = [NSHomeDirectory() stringByAppendingFormat:@"/tmp/output-%@.mp4", [formater stringFromDate:[NSDate date]]];
-                NSLog(@"video outputPath = %@",outputPath);
-                
-                exportSession.outputURL = [NSURL fileURLWithPath:outputPath];
-                exportSession.outputFileType = AVFileTypeMPEG4;
-                exportSession.shouldOptimizeForNetworkUse = YES;
-                [exportSession exportAsynchronouslyWithCompletionHandler:^(void) {
-                    switch (exportSession.status) {
-                        case AVAssetExportSessionStatusUnknown:
-                            NSLog(@"AVAssetExportSessionStatusUnknown"); break;
-                        case AVAssetExportSessionStatusWaiting:
-                            NSLog(@"AVAssetExportSessionStatusWaiting"); break;
-                        case AVAssetExportSessionStatusExporting:
-                            NSLog(@"AVAssetExportSessionStatusExporting"); break;
-                        case AVAssetExportSessionStatusCompleted:
-                            NSLog(@"AVAssetExportSessionStatusCompleted");
-                            if (completion) {
-                                completion(outputPath);
-                            }
-                            break;
-                        case AVAssetExportSessionStatusFailed:
-                            NSLog(@"AVAssetExportSessionStatusFailed"); break;
-                        default: break;
+            [self startExportVideoWithVideoAsset:videoAsset completion:completion];
+        }];
+    } else if ([asset isKindOfClass:[ALAsset class]]) {
+        NSURL *videoURL =[asset valueForProperty:ALAssetPropertyAssetURL]; // ALAssetPropertyURLs
+        AVURLAsset *videoAsset = [[AVURLAsset alloc]initWithURL:videoURL options:nil];
+        [self startExportVideoWithVideoAsset:videoAsset completion:completion];
+    }
+}
+
+- (void)startExportVideoWithVideoAsset:(AVURLAsset *)videoAsset completion:(void (^)(NSString *outputPath))completion {
+    // Find compatible presets by video asset.
+    NSArray *presets = [AVAssetExportSession exportPresetsCompatibleWithAsset:videoAsset];
+    
+    // Begin to compress video
+    // Now we just compress to low resolution if it supports
+    // If you need to upload to the server, but server does't support to upload by streaming,
+    // You can compress the resolution to lower. Or you can support more higher resolution.
+    if ([presets containsObject:AVAssetExportPreset640x480]) {
+        AVAssetExportSession *session = [[AVAssetExportSession alloc]initWithAsset:videoAsset presetName:AVAssetExportPreset640x480];
+        
+        NSDateFormatter *formater = [[NSDateFormatter alloc] init];
+        [formater setDateFormat:@"yyyy-MM-dd-HH:mm:ss"];
+        NSString *outputPath = [NSHomeDirectory() stringByAppendingFormat:@"/tmp/output-%@.mp4", [formater stringFromDate:[NSDate date]]];
+        NSLog(@"video outputPath = %@",outputPath);
+        session.outputURL = [NSURL fileURLWithPath:outputPath];
+        
+        // Optimize for network use.
+        session.shouldOptimizeForNetworkUse = true;
+        
+        NSArray *supportedTypeArray = session.supportedFileTypes;
+        if ([supportedTypeArray containsObject:AVFileTypeMPEG4]) {
+            session.outputFileType = AVFileTypeMPEG4;
+        } else if (supportedTypeArray.count == 0) {
+            NSLog(@"No supported file types 视频类型暂不支持导出");
+            return;
+        } else {
+            session.outputFileType = [supportedTypeArray objectAtIndex:0];
+        }
+        
+        // Begin to export video to the output path asynchronously.
+        [session exportAsynchronouslyWithCompletionHandler:^(void) {
+            switch (session.status) {
+                case AVAssetExportSessionStatusUnknown:
+                    NSLog(@"AVAssetExportSessionStatusUnknown"); break;
+                case AVAssetExportSessionStatusWaiting:
+                    NSLog(@"AVAssetExportSessionStatusWaiting"); break;
+                case AVAssetExportSessionStatusExporting:
+                    NSLog(@"AVAssetExportSessionStatusExporting"); break;
+                case AVAssetExportSessionStatusCompleted:
+                    NSLog(@"AVAssetExportSessionStatusCompleted");
+                    if (completion) {
+                        completion(outputPath);
                     }
-                }];
+                    break;
+                case AVAssetExportSessionStatusFailed:
+                    NSLog(@"AVAssetExportSessionStatusFailed"); break;
+                default: break;
             }
         }];
-    } else {
-        NSLog(@"iOS8以前的系统，导出视频代码暂未更新...");
     }
 }
 
