@@ -36,12 +36,12 @@ RCT_EXPORT_METHOD(launchImageGallery:(NSDictionary *)options resolver:(RCTPromis
     imagePickerController.allowPickingOriginalPhoto = NO;
     imagePickerController.allowPickingVideo = NO;
     imagePickerController.selectedAssets = selectedAssets;
-
-    UIViewController *root = [[[[UIApplication sharedApplication] delegate]
-                               window] rootViewController];
-    [root presentViewController:imagePickerController
-                       animated:YES
-                     completion:NULL];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIViewController *root = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+        [root presentViewController:imagePickerController
+                           animated:YES
+                         completion:NULL];
+});
 }
 
 #pragma mark TZImagePickerControllerDelegate
