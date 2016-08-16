@@ -72,7 +72,7 @@ public class MultipleImagePicker extends ReactContextBaseJavaModule {
             rxGalleryFinal.radio().imageLoader(ImageLoaderType.PICASSO).subscribe(new RxBusResultSubscriber<ImageRadioResultEvent>() {
                 @Override
                 protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) throws Exception {
-                    promise.resolve(imageRadioResultEvent.getResult().getOriginalPath());
+                    promise.resolve("file://" + imageRadioResultEvent.getResult().getOriginalPath());
                 }
             }).openGallery();
         } else {
