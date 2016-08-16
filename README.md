@@ -1,15 +1,42 @@
 # react-native-multiple-image-picker
-React Native Multiple Image Picker is a React Native native module (currently iOS only) wrapping [TZImagePickerController](https://github.com/banchichen/TZImagePickerController).
+React Native Multiple Image Picker is a React Native native module wrapping [TZImagePickerController](https://github.com/banchichen/TZImagePickerController) for iOS and [RxGalleryFinal](https://github.com/FinalTeam/RxGalleryFinal) for Android.
+
+## Known Issues
+
+Currently, [RxGalleryFinal](https://github.com/FinalTeam/RxGalleryFinal) is still in a pre-release stage and is NOT READY for production yet. Image previews are not presented in correct aspect ratios.
 
 ## Install
 
+### iOS
+
 1. Run `npm install --save liaoyuan-io/react-native-multiple-image-picker` .
-
 2. Add `RCTMultipleImagePicker` to your iOS project.
-
 3. Add `libRCTMultipleImagePicker.a` to your `Link Binary with Libraries` section in `Build Phases` .
-
 4. Add `TZImagePickerController.bundle` to your `Resources` group and `Copy Bundle Resources` section in `Build Phases` .
+
+### Android
+
+1. Run `npm install --save liaoyuan-io/react-native-multiple-image-picker` .
+2. Add `new MultipleImagePickerPackage()` to your `getPackages` return in `android/app/src/main/java/com/your/path/MainApplication.java`.
+3. Add following to your `android/app/src/main/AndroidManifest.xml`:
+    ```
+    // permission declaration
+    <uses-feature android:name="android.hardware.camera" android:required="true"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    
+    // in application
+        <activity
+                android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
+                android:exported="true"
+                android:screenOrientation="portrait"/>
+    ```
+4. Add `compile project(':react-native-multiple-image-picker')` to `dependencies` section in `android/app/build.gradle` .
+5. Add following to your `android/settings.gradle`:
+    ```
+    include ':react-native-multiple-image-picker'
+    project(':react-native-multiple-image-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-multiple-image-picker/android')
+    ```
 
 ## Usage
 
