@@ -2,16 +2,17 @@ package io.liaoyuan.reactnative.multipleimagepicker;
 
 import android.util.Log;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableArray;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -85,11 +86,10 @@ public class MultipleImagePicker extends ReactContextBaseJavaModule {
                 @Override
                 protected void onEvent(ImageMultipleResultEvent imageMultipleResultEvent) throws Exception {
                     List<MediaBean> list = imageMultipleResultEvent.getResult();
-                    List<String> paths = new ArrayList<String>();
+                    WritableArray paths = Arguments.createArray();
                     for (MediaBean bean : list) {
-                        String path = bean.getOriginalPath();
-                        Log.d("123123", path);
-                        paths.add(path);
+                        String path = "file://" + bean.getOriginalPath();
+                        paths.pushString(path);
                         MultipleImagePicker.this.assetsFromPath.put(path, bean);
                     }
                     promise.resolve(paths);
