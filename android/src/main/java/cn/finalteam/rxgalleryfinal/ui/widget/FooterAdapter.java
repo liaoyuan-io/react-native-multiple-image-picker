@@ -37,7 +37,12 @@ public class FooterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if(isFooter(position)) {
         } else {
             if(mOnItemClickListener != null) {
-                holder.itemView.setOnClickListener(v -> mOnItemClickListener.onItemClick(holder, position));
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mOnItemClickListener.onItemClick(holder, position);
+                    }
+                });
             }
             mAdapter.onBindViewHolder(holder, position);
         }

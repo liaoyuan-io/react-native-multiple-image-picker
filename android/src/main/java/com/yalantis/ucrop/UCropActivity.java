@@ -430,13 +430,16 @@ public class UCropActivity extends BaseActivity {
         mCropAspectRatioViews.get(aspectRationSelectedByDefault).setSelected(true);
 
         for (ViewGroup cropAspectRatioView : mCropAspectRatioViews) {
-            cropAspectRatioView.setOnClickListener(v -> {
-                mGestureCropImageView.setTargetAspectRatio(
+            cropAspectRatioView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mGestureCropImageView.setTargetAspectRatio(
                         ((AspectRatioTextView) ((ViewGroup) v).getChildAt(0)).getAspectRatio(v.isSelected()));
-                mGestureCropImageView.setImageToWrapCropBounds();
-                if (!v.isSelected()) {
-                    for (ViewGroup cropAspectRatioView1 : mCropAspectRatioViews) {
-                        cropAspectRatioView1.setSelected(cropAspectRatioView1 == v);
+                    mGestureCropImageView.setImageToWrapCropBounds();
+                    if (!v.isSelected()) {
+                        for (ViewGroup cropAspectRatioView1 : mCropAspectRatioViews) {
+                            cropAspectRatioView1.setSelected(cropAspectRatioView1 == v);
+                        }
                     }
                 }
             });
@@ -466,8 +469,18 @@ public class UCropActivity extends BaseActivity {
         ((HorizontalProgressWheelView) findViewById(R.id.rotate_scroll_wheel)).setMiddleLineColor(mActiveWidgetColor);
 
 
-        findViewById(R.id.wrapper_reset_rotate).setOnClickListener(v -> resetRotation());
-        findViewById(R.id.wrapper_rotate_by_angle).setOnClickListener(v -> rotateByAngle(90));
+        findViewById(R.id.wrapper_reset_rotate).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UCropActivity.this.resetRotation();
+            }
+        });
+        findViewById(R.id.wrapper_rotate_by_angle).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UCropActivity.this.rotateByAngle(90);
+            }
+        });
     }
 
     private void setupScaleWidget() {
@@ -520,9 +533,12 @@ public class UCropActivity extends BaseActivity {
         mGestureCropImageView.setImageToWrapCropBounds();
     }
 
-    private final View.OnClickListener mStateClickListener = v -> {
-        if (!v.isSelected()) {
-            setWidgetState(v.getId());
+    private final View.OnClickListener mStateClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (!v.isSelected()) {
+                UCropActivity.this.setWidgetState(v.getId());
+            }
         }
     };
 

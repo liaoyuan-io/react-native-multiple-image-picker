@@ -35,6 +35,7 @@ import cn.finalteam.rxgalleryfinal.Configuration;
 import cn.finalteam.rxgalleryfinal.R;
 import cn.finalteam.rxgalleryfinal.RxGalleryFinal;
 import cn.finalteam.rxgalleryfinal.anim.Animation;
+import cn.finalteam.rxgalleryfinal.anim.AnimationListener;
 import cn.finalteam.rxgalleryfinal.anim.SlideInUnderneathAnimation;
 import cn.finalteam.rxgalleryfinal.anim.SlideOutUnderneathAnimation;
 import cn.finalteam.rxgalleryfinal.bean.BucketBean;
@@ -72,6 +73,7 @@ import cn.finalteam.rxgalleryfinal.utils.ThemeUtils;
 import cn.finalteam.rxgalleryfinal.view.MediaGridView;
 import rx.Observable;
 import rx.Observer;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -496,9 +498,12 @@ public class MediaGridFragment extends BaseFragment implements MediaGridView, Re
                 new SlideOutUnderneathAnimation(mRvBucket)
                         .setDirection(Animation.DIRECTION_DOWN)
                         .setDuration(Animation.DURATION_DEFAULT)
-                        .setListener(animation -> {
-                            v.setEnabled(true);
-                            mRlBucektOverview.setVisibility(View.GONE);
+                        .setListener(new AnimationListener() {
+                            @Override
+                            public void onAnimationEnd(Animation animation) {
+                                v.setEnabled(true);
+                                mRlBucektOverview.setVisibility(View.GONE);
+                            }
                         })
                         .animate();
             } else  {
@@ -506,8 +511,11 @@ public class MediaGridFragment extends BaseFragment implements MediaGridView, Re
                 new SlideInUnderneathAnimation(mRvBucket)
                         .setDirection(Animation.DIRECTION_DOWN)
                         .setDuration(Animation.DURATION_DEFAULT)
-                        .setListener(animation -> {
-                            v.setEnabled(true);
+                        .setListener(new AnimationListener() {
+                            @Override
+                            public void onAnimationEnd(Animation animation) {
+                                v.setEnabled(true);
+                            }
                         })
                         .animate();
             }
@@ -521,10 +529,13 @@ public class MediaGridFragment extends BaseFragment implements MediaGridView, Re
             return;
         }
 
-        Observable.create((Observable.OnSubscribe<MediaBean>) subscriber -> {
-            MediaBean mediaBean = MediaUtils.getMediaBeanWithImage(getContext(), images[0]);
-            subscriber.onNext(mediaBean);
-            subscriber.onCompleted();
+        Observable.create((Observable.OnSubscribe<MediaBean>) new Observable.OnSubscribe<MediaBean>() {
+            @Override
+            public void call(Subscriber<? super MediaBean> subscriber) {
+                MediaBean mediaBean = MediaUtils.getMediaBeanWithImage(MediaGridFragment.this.getContext(), images[0]);
+                subscriber.onNext(mediaBean);
+                subscriber.onCompleted();
+            }
         })
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())

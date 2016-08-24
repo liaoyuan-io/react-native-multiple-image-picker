@@ -9,6 +9,7 @@ import cn.finalteam.rxgalleryfinal.interactor.MediaBucketFactoryInteractor;
 import cn.finalteam.rxgalleryfinal.utils.MediaUtils;
 import rx.Observable;
 import rx.Observer;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -29,17 +30,20 @@ public class MediaBucketFactoryInteractorImpl implements MediaBucketFactoryInter
         this.onGenerateBucketListener = onGenerateBucketListener;
     }
 
-    @Override
     public void generateBuckets() {
-        Observable.create((Observable.OnSubscribe<List<BucketBean>>) subscriber -> {
-            List<BucketBean> bucketBeanList = null;
-            if(isImage) {
-                bucketBeanList = MediaUtils.getAllBucketByImage(context);
-            } else {
-                bucketBeanList = MediaUtils.getAllBucketByVideo(context);
+        Observable.create(new Observable.OnSubscribe<List<BucketBean>>() {
+
+            @Override
+            public void call(Subscriber<? super List<BucketBean>> subscriber) {
+                List<BucketBean> bucketBeanList = null;
+                if(isImage) {
+                    bucketBeanList = MediaUtils.getAllBucketByImage(context);
+                } else {
+                    bucketBeanList = MediaUtils.getAllBucketByVideo(context);
+                }
+                subscriber.onNext(bucketBeanList);
+                subscriber.onCompleted();
             }
-            subscriber.onNext(bucketBeanList);
-            subscriber.onCompleted();
         })
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())

@@ -21,6 +21,6 @@ public interface MediaSrcFactoryInteractor {
      * @param page
      * @param limit
      */
-    void generateMeidas(String bucketId, int page, int limit);
+    void generateMedias(String bucketId, int page, int limit);
 
 }

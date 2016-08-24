@@ -47,6 +47,7 @@ import cn.finalteam.rxgalleryfinal.utils.OsCompat;
 import cn.finalteam.rxgalleryfinal.utils.ThemeUtils;
 import cn.finalteam.rxgalleryfinal.view.ActivityFragmentView;
 import rx.Subscription;
+import rx.functions.Func1;
 
 /**
  * Desction:
@@ -79,11 +80,14 @@ public class MediaActivity extends BaseActivity implements ActivityFragmentView 
         setTheme();
 
         if(!mConfiguration.isRadio()) {
-            mTvOverAction.setOnClickListener(view -> {
-                if(mCheckedList != null && mCheckedList.size() > 0) {
-                    BaseResultEvent event = new ImageMultipleResultEvent(mCheckedList);
-                    RxBus.getDefault().post(event);
-                    finish();
+            mTvOverAction.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(mCheckedList != null && mCheckedList.size() > 0) {
+                        BaseResultEvent event = new ImageMultipleResultEvent(mCheckedList);
+                        RxBus.getDefault().post(event);
+                        finish();
+                    }
                 }
             });
             mTvOverAction.setVisibility(View.VISIBLE);
@@ -217,7 +221,12 @@ public class MediaActivity extends BaseActivity implements ActivityFragmentView 
 
     private void subscribeEvent() {
         Subscription subscriptionOpenMediaPreviewEvent = RxBus.getDefault().toObservable(OpenMediaPreviewFragmentEvent.class)
-                .map(mediaPreviewEvent -> mediaPreviewEvent)
+                .map(new Func1<OpenMediaPreviewFragmentEvent, OpenMediaPreviewFragmentEvent>() {
+                    @Override
+                    public OpenMediaPreviewFragmentEvent call(OpenMediaPreviewFragmentEvent mediaPreviewEvent) {
+                        return mediaPreviewEvent;
+                    }
+                })
                 .subscribe(new RxBusSubscriber<OpenMediaPreviewFragmentEvent>() {
                     @Override
                     protected void onEvent(OpenMediaPreviewFragmentEvent openMediaPreviewFragmentEvent) {
@@ -228,7 +237,12 @@ public class MediaActivity extends BaseActivity implements ActivityFragmentView 
         RxBus.getDefault().add(subscriptionOpenMediaPreviewEvent);
 
         Subscription subscriptionMediaCheckChangeEvent = RxBus.getDefault().toObservable(MediaCheckChangeEvent.class)
-                .map(mediaCheckChangeEvent -> mediaCheckChangeEvent)
+                .map(new Func1<MediaCheckChangeEvent, MediaCheckChangeEvent>() {
+                    @Override
+                    public MediaCheckChangeEvent call(MediaCheckChangeEvent mediaCheckChangeEvent) {
+                        return mediaCheckChangeEvent;
+                    }
+                })
                 .subscribe(new RxBusSubscriber<MediaCheckChangeEvent>() {
                     @Override
                     protected void onEvent(MediaCheckChangeEvent mediaCheckChangeEvent) {
@@ -252,7 +266,12 @@ public class MediaActivity extends BaseActivity implements ActivityFragmentView 
         RxBus.getDefault().add(subscriptionMediaCheckChangeEvent);
 
         Subscription subscriptionMediaViewPagerChangedEvent = RxBus.getDefault().toObservable(MediaViewPagerChangedEvent.class)
-                .map(mediaViewPagerChangedEvent -> mediaViewPagerChangedEvent)
+                .map(new Func1<MediaViewPagerChangedEvent, MediaViewPagerChangedEvent>() {
+                    @Override
+                    public MediaViewPagerChangedEvent call(MediaViewPagerChangedEvent mediaViewPagerChangedEvent) {
+                        return mediaViewPagerChangedEvent;
+                    }
+                })
                 .subscribe(new RxBusSubscriber<MediaViewPagerChangedEvent>() {
                     @Override
                     protected void onEvent(MediaViewPagerChangedEvent mediaPreviewViewPagerChangedEvent) {

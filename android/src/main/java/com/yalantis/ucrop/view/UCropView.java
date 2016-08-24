@@ -2,10 +2,14 @@ package com.yalantis.ucrop.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.RectF;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
+
+import com.yalantis.ucrop.callback.CropBoundsChangeListener;
+import com.yalantis.ucrop.callback.OverlayViewChangeListener;
 
 import cn.finalteam.rxgalleryfinal.R;
 
@@ -31,8 +35,18 @@ public class UCropView extends FrameLayout {
         a.recycle();
 
 
-        mGestureCropImageView.setCropBoundsChangeListener(cropRatio -> mViewOverlay.setTargetAspectRatio(cropRatio));
-        mViewOverlay.setOverlayViewChangeListener(cropRect -> mGestureCropImageView.setCropRect(cropRect));
+        mGestureCropImageView.setCropBoundsChangeListener(new CropBoundsChangeListener() {
+            @Override
+            public void onCropAspectRatioChanged(float cropRatio) {
+                mViewOverlay.setTargetAspectRatio(cropRatio);
+            }
+        });
+        mViewOverlay.setOverlayViewChangeListener(new OverlayViewChangeListener() {
+            @Override
+            public void onCropRectUpdated(RectF cropRect) {
+                mGestureCropImageView.setCropRect(cropRect);
+            }
+        });
     }
 
     @Override
