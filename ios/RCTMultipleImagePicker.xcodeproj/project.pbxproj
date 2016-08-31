@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F40B3EA1D776C5C00DED250 /* NSBundle+TZImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F40B3E91D776C5C00DED250 /* NSBundle+TZImagePicker.m */; };
 		9F94BF341D18AAEC00602E33 /* RCTMultipleImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F94BE941D187EF500602E33 /* RCTMultipleImagePicker.m */; };
 		9FA5B4461D18E588007FE68B /* TZAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA5B4331D18E588007FE68B /* TZAssetCell.m */; };
 		9FA5B4471D18E588007FE68B /* TZAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA5B4351D18E588007FE68B /* TZAssetModel.m */; };
@@ -32,6 +33,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9F40B3E81D776C5C00DED250 /* NSBundle+TZImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+TZImagePicker.h"; sourceTree = "<group>"; };
+		9F40B3E91D776C5C00DED250 /* NSBundle+TZImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+TZImagePicker.m"; sourceTree = "<group>"; };
 		9F94BE921D187EF500602E33 /* RCTMultipleImagePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTMultipleImagePicker.h; sourceTree = "<group>"; };
 		9F94BE941D187EF500602E33 /* RCTMultipleImagePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTMultipleImagePicker.m; sourceTree = "<group>"; };
 		9F94BEEB1D18A40000602E33 /* libRCTMultipleImagePicker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTMultipleImagePicker.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,30 +91,16 @@
 		9FA5B42C1D18E562007FE68B /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				9FA5B42D1D18E588007FE68B /* TZImagePickerController */,
-			);
-			name = Libraries;
-			sourceTree = "<group>";
-		};
-		9FA5B42D1D18E588007FE68B /* TZImagePickerController */ = {
-			isa = PBXGroup;
-			children = (
-				9FA5B4301D18E588007FE68B /* TZImagePickerController */,
-			);
-			path = TZImagePickerController;
-			sourceTree = "<group>";
-		};
-		9FA5B4301D18E588007FE68B /* TZImagePickerController */ = {
-			isa = PBXGroup;
-			children = (
 				9FA5B4311D18E588007FE68B /* TZImagePickerController */,
 			);
-			path = TZImagePickerController;
+			name = Libraries;
 			sourceTree = "<group>";
 		};
 		9FA5B4311D18E588007FE68B /* TZImagePickerController */ = {
 			isa = PBXGroup;
 			children = (
+				9F40B3E81D776C5C00DED250 /* NSBundle+TZImagePicker.h */,
+				9F40B3E91D776C5C00DED250 /* NSBundle+TZImagePicker.m */,
 				9FA5B4321D18E588007FE68B /* TZAssetCell.h */,
 				9FA5B4331D18E588007FE68B /* TZAssetCell.m */,
 				9FA5B4341D18E588007FE68B /* TZAssetModel.h */,
@@ -132,7 +121,8 @@
 				9FA5B4431D18E588007FE68B /* UIView+Layout.h */,
 				9FA5B4441D18E588007FE68B /* UIView+Layout.m */,
 			);
-			path = TZImagePickerController;
+			name = TZImagePickerController;
+			path = TZImagePickerController/TZImagePickerController/TZImagePickerController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +183,7 @@
 				9FA5B4471D18E588007FE68B /* TZAssetModel.m in Sources */,
 				9FA5B44B1D18E588007FE68B /* TZPhotoPreviewCell.m in Sources */,
 				9FA5B4491D18E588007FE68B /* TZImagePickerController.m in Sources */,
+				9F40B3EA1D776C5C00DED250 /* NSBundle+TZImagePicker.m in Sources */,
 				9FA5B44D1D18E588007FE68B /* TZVideoPlayerController.m in Sources */,
 				9F94BF341D18AAEC00602E33 /* RCTMultipleImagePicker.m in Sources */,
 				9FA5B44A1D18E588007FE68B /* TZPhotoPickerController.m in Sources */,
