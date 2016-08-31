@@ -58,7 +58,7 @@ public class MultipleImagePicker extends ReactContextBaseJavaModule {
         boolean single;
         int maxImagesCount;
 
-        single = options.hasKey("single") && options.getBoolean("single");
+        single = options.hasKey("maxImagesCount") && options.getInt("maxImagesCount") == 1;
 
         if (options.hasKey("maxImagesCount")) {
             maxImagesCount = options.getInt("maxImagesCount");
