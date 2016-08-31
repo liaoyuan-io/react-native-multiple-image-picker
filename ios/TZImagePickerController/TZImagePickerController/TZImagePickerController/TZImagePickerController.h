@@ -4,7 +4,7 @@
 //
 //  Created by 谭真 on 15/12/24.
 //  Copyright © 2015年 谭真. All rights reserved.
-//  version 1.5.0
+//  version 1.6.3 - 2016.08.29
 
 /*
  经过测试，比起xib的方式，把TZAssetCell改用纯代码的方式来写，滑动帧数明显提高了（约提高10帧左右）
@@ -17,6 +17,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TZAssetModel.h"
+#import "NSBundle+TZImagePicker.h"
 
 #define iOS7Later ([UIDevice currentDevice].systemVersion.floatValue >= 7.0f)
 #define iOS8Later ([UIDevice currentDevice].systemVersion.floatValue >= 8.0f)
@@ -28,6 +29,7 @@
 
 /// Use this init method / 用这个初始化方法
 - (instancetype)initWithMaxImagesCount:(NSInteger)maxImagesCount delegate:(id<TZImagePickerControllerDelegate>)delegate;
+- (instancetype)initWithMaxImagesCount:(NSInteger)maxImagesCount columnNumber:(NSInteger)columnNumber delegate:(id<TZImagePickerControllerDelegate>)delegate;
 /// This init method just for previewing photos / 用这个初始化方法以预览图片
 - (instancetype)initWithSelectedAssets:(NSMutableArray *)selectedAssets selectedPhotos:(NSMutableArray *)selectedPhotos index:(NSInteger)index;
 
@@ -64,6 +66,10 @@
 /// 默认为YES，如果设置为NO,拍照按钮将隐藏,用户将不能在选择器中拍照
 @property(nonatomic, assign) BOOL allowTakePicture;
 
+/// Default is YES.if set NO, the picker don't dismiss itself.
+/// 默认为YES，如果设置为NO, 选择器将不会自己dismiss
+@property(nonatomic, assign) BOOL autoDismiss;
+
 /// The photos user have selected
 /// 用户选中过的图片数组
 @property (nonatomic, strong) NSMutableArray *selectedAssets;
@@ -74,15 +80,27 @@
 - (void)hideProgressHUD;
 @property (nonatomic, assign) BOOL isSelectOriginalPhoto;
 
+@property (nonatomic, copy) NSString *takePictureImageName;
+@property (nonatomic, copy) NSString *photoSelImageName;
+@property (nonatomic, copy) NSString *photoDefImageName;
+@property (nonatomic, copy) NSString *photoOriginSelImageName;
+@property (nonatomic, copy) NSString *photoOriginDefImageName;
+@property (nonatomic, copy) NSString *photoPreviewOriginDefImageName;
+@property (nonatomic, copy) NSString *photoNumberIconImageName;
+
 /// Appearance / 外观颜色
 @property (nonatomic, strong) UIColor *oKButtonTitleColorNormal;
 @property (nonatomic, strong) UIColor *oKButtonTitleColorDisabled;
+@property (nonatomic, strong) UIColor *barItemTextColor;
+@property (nonatomic, strong) UIFont *barItemTextFont;
 
 // The picker should dismiss itself; when it dismissed these handle will be called.
+// You can also set autoDismiss to NO, then the picker don't dismiss itself.
 // If isOriginalPhoto is YES, user picked the original photo.
 // You can get original photo with asset, by the method [[TZImageManager manager] getOriginalPhotoWithAsset:completion:].
 // The UIImage Object in photos default width is 828px, you can set it by photoWidth property.
 // 这个照片选择器会自己dismiss，当选择器dismiss的时候，会执行下面的handle
+// 你也可以设置autoDismiss属性为NO，选择器就不会自己dismis了
 // 如果isSelectOriginalPhoto为YES，表明用户选择了原图
 // 你可以通过一个asset获得原图，通过这个方法：[[TZImageManager manager] getOriginalPhotoWithAsset:completion:]
 // photos数组里的UIImage对象，默认是828像素宽，你可以通过设置photoWidth属性的值来改变它
@@ -103,10 +121,12 @@
 @protocol TZImagePickerControllerDelegate <NSObject>
 @optional
 // The picker should dismiss itself; when it dismissed these handle will be called.
+// You can also set autoDismiss to NO, then the picker don't dismiss itself.
 // If isOriginalPhoto is YES, user picked the original photo.
 // You can get original photo with asset, by the method [[TZImageManager manager] getOriginalPhotoWithAsset:completion:].
 // The UIImage Object in photos default width is 828px, you can set it by photoWidth property.
 // 这个照片选择器会自己dismiss，当选择器dismiss的时候，会执行下面的handle
+// 你也可以设置autoDismiss属性为NO，选择器就不会自己dismis了
 // 如果isSelectOriginalPhoto为YES，表明用户选择了原图
 // 你可以通过一个asset获得原图，通过这个方法：[[TZImageManager manager] getOriginalPhotoWithAsset:completion:]
 // photos数组里的UIImage对象，默认是828像素宽，你可以通过设置photoWidth属性的值来改变它
@@ -122,7 +142,7 @@
 
 
 @interface TZAlbumPickerController : UIViewController
-
+@property (nonatomic, assign) NSInteger columnNumber;
 @end
 
 

@@ -23,6 +23,10 @@
 /// Default is 600px / 默认600像素宽
 @property (nonatomic, assign) CGFloat photoPreviewMaxWidth;
 
+/// Default is 4, Use in photos collectionView in TZPhotoPickerController
+/// 默认4列, TZPhotoPickerController中的照片collectionView
+@property (nonatomic, assign) NSInteger columnNumber;
+
 /// Sort photos ascending by modificationDate，Default is YES
 /// 对照片排序，按修改时间升序，默认是YES。如果设置为NO,最新的照片会显示在最前面，内部的拍照按钮会排在第一个
 @property (nonatomic, assign) BOOL sortAscendingByModificationDate;
@@ -43,9 +47,10 @@
 - (PHImageRequestID)getPhotoWithAsset:(id)asset completion:(void (^)(UIImage *photo,NSDictionary *info,BOOL isDegraded))completion;
 - (PHImageRequestID)getPhotoWithAsset:(id)asset photoWidth:(CGFloat)photoWidth completion:(void (^)(UIImage *photo,NSDictionary *info,BOOL isDegraded))completion;
 - (void)getOriginalPhotoWithAsset:(id)asset completion:(void (^)(UIImage *photo,NSDictionary *info))completion;
+- (void)getOriginalPhotoDataWithAsset:(id)asset completion:(void (^)(NSData *data,NSDictionary *info))completion;
 
 /// Save photo 保存照片
-- (void)savePhotoWithImage:(UIImage *)image completion:(void (^)())completion;
+- (void)savePhotoWithImage:(UIImage *)image completion:(void (^)(NSError *error))completion;
 
 /// Get video 获得视频
 - (void)getVideoWithAsset:(id)asset completion:(void (^)(AVPlayerItem * playerItem, NSDictionary * info))completion;
@@ -60,5 +65,6 @@
 - (BOOL)isAssetsArray:(NSArray *)assets containAsset:(id)asset;
 
 - (NSString *)getAssetIdentifier:(id)asset;
+- (BOOL)isCameraRollAlbum:(NSString *)albumName;
 
 @end

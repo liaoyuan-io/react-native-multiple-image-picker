@@ -59,13 +59,23 @@
     }
     self.imageRequestID = imageRequestID;
     self.selectPhotoButton.selected = model.isSelected;
-    self.selectImageView.image = self.selectPhotoButton.isSelected ? [UIImage imageNamedFromMyBundle:@"photo_sel_photoPickerVc.png"] : [UIImage imageNamedFromMyBundle:@"photo_def_photoPickerVc.png"];
+    self.selectImageView.image = self.selectPhotoButton.isSelected ? [UIImage imageNamedFromMyBundle:self.photoSelImageName] : [UIImage imageNamedFromMyBundle:self.photoDefImageName];
     self.type = TZAssetCellTypePhoto;
     if (model.type == TZAssetModelMediaTypeLivePhoto)      self.type = TZAssetCellTypeLivePhoto;
     else if (model.type == TZAssetModelMediaTypeAudio)     self.type = TZAssetCellTypeAudio;
     else if (model.type == TZAssetModelMediaTypeVideo) {
         self.type = TZAssetCellTypeVideo;
         self.timeLength.text = model.timeLength;
+    }
+}
+
+- (void)setMaxImagesCount:(NSInteger)maxImagesCount {
+    _maxImagesCount = maxImagesCount;
+    if (!self.selectPhotoButton.hidden) {
+        self.selectPhotoButton.hidden = maxImagesCount == 1;
+    }
+    if (!self.selectImageView.hidden) {
+        self.selectImageView.hidden = maxImagesCount == 1;
     }
 }
 
@@ -86,7 +96,7 @@
     if (self.didSelectPhotoBlock) {
         self.didSelectPhotoBlock(sender.isSelected);
     }
-    self.selectImageView.image = sender.isSelected ? [UIImage imageNamedFromMyBundle:@"photo_sel_photoPickerVc.png"] : [UIImage imageNamedFromMyBundle:@"photo_def_photoPickerVc.png"];
+    self.selectImageView.image = sender.isSelected ? [UIImage imageNamedFromMyBundle:self.photoSelImageName] : [UIImage imageNamedFromMyBundle:self.photoDefImageName];
     if (sender.isSelected) {
         [UIView showOscillatoryAnimationWithLayer:_selectImageView.layer type:TZOscillatoryAnimationToBigger];
     }
@@ -213,7 +223,7 @@
 #pragma mark - Lazy load
 
 - (UIImageView *)posterImageView {
-    if (_arrowImageView == nil) {
+    if (_posterImageView == nil) {
         UIImageView *posterImageView = [[UIImageView alloc] init];
         posterImageView.contentMode = UIViewContentModeScaleAspectFill;
         posterImageView.clipsToBounds = YES;
