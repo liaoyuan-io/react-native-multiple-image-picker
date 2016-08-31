@@ -44,7 +44,7 @@ Currently, [RxGalleryFinal](https://github.com/FinalTeam/RxGalleryFinal) is stil
 import MultipleImagePicker from 'react-native-multiple-image-picker';
 
 const options = {
-    maxImagesCount: 9,      // Max number of images user can select
+    maxImagesCount: 9,      // Max number of images user can select; if maxImagesCount == 1, Single mode (i.e. Tap to Select & Finish) will be activated.
     selectedPaths: [
         '/Users/tshen/Library/Developer/CoreSimulator/Devices/8C416B45-F555-4A63-A1B0-09E61109F0A0/data/Containers/Data/Application/A1790255-CDE8-486C-A6BA-1693BA2AA87B/Documents/BB6ADD56-09E7-402C-BF0E-AD79400D3889-7539-000007B93A6B5733/0.jpg',
         '/Users/tshen/Library/Developer/CoreSimulator/Devices/8C416B45-F555-4A63-A1B0-09E61109F0A0/data/Containers/Data/Application/A1790255-CDE8-486C-A6BA-1693BA2AA87B/Documents/BB6ADD56-09E7-402C-BF0E-AD79400D3889-7539-000007B93A6B5733/1.jpg',
@@ -55,13 +55,4 @@ const options = {
 MultipleImagePicker.launchImageGallery(options).then((newSelectedPaths) => {
     // newSelectedPaths will be an Array of String, like [ '/path/1', '/path/2' ], and may be used for `selectedPaths` on the next invocation
 });
-
-// single mode - Android only
-const singleOptions = {
-    single: true
-};
-MultipleImagePicker.launchImageGallery(singleOptions).then((path) => {
-    // path will be a String, like 'file:///storage/sdcard/Download/IMG_0617.JPG'
-});
-
 ```
