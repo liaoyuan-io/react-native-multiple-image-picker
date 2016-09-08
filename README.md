@@ -33,11 +33,12 @@ Currently, [RxGalleryFinal](https://github.com/FinalTeam/RxGalleryFinal) is stil
     ```
 4. Add `compile project(':react-native-multiple-image-picker')` to `dependencies` section in `android/app/build.gradle` .
 5. Add following to your `android/settings.gradle`:
+
     ```
     include ':react-native-multiple-image-picker'
     project(':react-native-multiple-image-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-multiple-image-picker/android')
     ```
-
+    
 ## Usage
 
 ```javascript
