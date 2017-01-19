@@ -1,9 +1,11 @@
 # react-native-multiple-image-picker
-React Native Multiple Image Picker is a React Native native module wrapping [TZImagePickerController](https://github.com/banchichen/TZImagePickerController) for iOS and [RxGalleryFinal](https://github.com/FinalTeam/RxGalleryFinal) for Android.
+React Native Multiple Image Picker is a React Native native module wrapping [TZImagePickerController](https://github.com/banchichen/TZImagePickerController) for iOS (iOS 8+ for using PhotoKit) and [RxGalleryFinal](https://github.com/FinalTeam/RxGalleryFinal) for Android (Android 4.1+). This module allows you to pick multiple images for further processing.
+
+React Native Multiple Image Picker 多图片选择器 是一个 React Native 原生模块，封装了 [TZImagePickerController](https://github.com/banchichen/TZImagePickerController)（用于 iOS 8+，因为使用了 PhotoKit）和 [RxGalleryFinal](https://github.com/FinalTeam/RxGalleryFinal)（用于 Android 4.1+，尚处于**试验阶段**）。使用这个模块你可以一次选择多张图片，以供进一步处理。
 
 ## Known Issues
 
-Currently, [RxGalleryFinal](https://github.com/FinalTeam/RxGalleryFinal) is still in a pre-release stage and is NOT READY for production yet. Image previews are not presented in correct aspect ratios.
+Currently, [RxGalleryFinal](https://github.com/FinalTeam/RxGalleryFinal) is still in a **pre-release** stage and is **NOT READY for production** yet. Image previews are not presented in correct aspect ratios.
 
 ## Install
 
