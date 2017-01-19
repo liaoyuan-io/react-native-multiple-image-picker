@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RCTBridgeModule.h"
-#import "RCTConvert.h"
-#import "RCTLog.h"
+#import <React/RCTBridgeModule.h>
+#import <React/RCTConvert.h>
+#import <React/RCTLog.h>
 #import "TZImagePickerController.h"
 
 
