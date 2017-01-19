@@ -8,6 +8,9 @@
 
 #import "RCTMultipleImagePicker.h"
 
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <Photos/Photos.h>
+
 @implementation RCTMultipleImagePicker
 
 RCT_EXPORT_MODULE();
@@ -32,19 +35,33 @@ RCT_EXPORT_METHOD(launchImageGallery:(NSDictionary *)options resolver:(RCTPromis
         [selectedAssets addObject:[self.assetsFromPath objectForKey:path]];
     }];
     
-    TZImagePickerController *imagePickerController = [[TZImagePickerController alloc] initWithMaxImagesCount:maxImagesCount delegate:self];
-    imagePickerController.allowPickingOriginalPhoto = NO;
-    imagePickerController.allowPickingVideo = NO;
-    imagePickerController.selectedAssets = selectedAssets;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UIViewController *root = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-        [root presentViewController:imagePickerController
-                           animated:YES
-                         completion:NULL];
-});
+  
+    NSError * error = nil;
+    
+    [self checkPhotosPermissions:^(BOOL granted) {
+        if (!granted) {
+          self.reject(@"error", @"Camera permissions not granted", error);
+          return;
+        } else {
+          [self showImagePickerController:maxImagesCount selectedAssets:selectedAssets];
+        }
+    }];
 }
 
 #pragma mark TZImagePickerControllerDelegate
+
+- (void)showImagePickerController:(NSInteger)maxImagesCount selectedAssets:(NSMutableArray *)selectedAssets {
+  TZImagePickerController *imagePickerController = [[TZImagePickerController alloc] initWithMaxImagesCount:maxImagesCount delegate:self];
+  imagePickerController.allowPickingOriginalPhoto = NO;
+  imagePickerController.allowPickingVideo = NO;
+  imagePickerController.selectedAssets = selectedAssets;
+  dispatch_async(dispatch_get_main_queue(), ^{
+    UIViewController *root = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    [root presentViewController:imagePickerController
+          animated:YES
+          completion:NULL];
+  });
+}
 
 - (void)imagePickerControllerDidCancel:(TZImagePickerController *)picker {
     self.reject(@"user_cancelled", @"User has cancelled.", nil);
@@ -78,6 +95,29 @@ RCT_EXPORT_METHOD(launchImageGallery:(NSDictionary *)options resolver:(RCTPromis
     }];
     
     self.resolve(result);
+}
+
+- (void)checkPhotosPermissions:(void(^)(BOOL granted))callback
+{
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    if (status == PHAuthorizationStatusAuthorized) {
+        callback(YES);
+        return;
+    } else if (status == PHAuthorizationStatusNotDetermined) {
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            if (status == PHAuthorizationStatusAuthorized) {
+                callback(YES);
+                return;
+            }
+            else {
+                callback(NO);
+                return;
+            }
+        }];
+    }
+    else {
+        callback(NO);
+    }
 }
 
 @end
