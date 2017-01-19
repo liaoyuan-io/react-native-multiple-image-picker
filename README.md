@@ -5,7 +5,8 @@ React Native Multiple Image Picker 多图片选择器 是一个 React Native 原
 
 ## Known Issues
 
-Currently, [RxGalleryFinal](https://github.com/FinalTeam/RxGalleryFinal) is still in a **pre-release** stage and is **NOT READY for production** yet. Image previews are not presented in correct aspect ratios.
+- Currently, [RxGalleryFinal](https://github.com/FinalTeam/RxGalleryFinal) is still in a **pre-release** stage and is **NOT READY for production** yet. Image previews are not presented in correct aspect ratios.
+- The `master` branch is still using the old React Native import path. If you has upgrade to React Native 0.40+ , please use `rn40` branch instead. 
 
 ## Install
 
