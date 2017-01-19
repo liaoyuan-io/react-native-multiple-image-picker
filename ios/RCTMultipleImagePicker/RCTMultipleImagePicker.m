@@ -40,7 +40,7 @@ RCT_EXPORT_METHOD(launchImageGallery:(NSDictionary *)options resolver:(RCTPromis
     
     [self checkPhotosPermissions:^(BOOL granted) {
         if (!granted) {
-          self.reject(@"error", @"Camera permissions not granted", error);
+          self.reject(@"camera_permission_not_granted", @"Camera permissions not granted", error);
           return;
         } else {
           [self showImagePickerController:maxImagesCount selectedAssets:selectedAssets];
