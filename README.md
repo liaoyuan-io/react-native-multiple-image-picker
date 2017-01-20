@@ -12,14 +12,14 @@ React Native Multiple Image Picker 多图片选择器 是一个 React Native 原
 
 ### iOS
 
-1. Run `npm install --save liaoyuan-io/react-native-multiple-image-picker` .
+1. Run `npm install --save react-native-multiple-image-picker` .
 2. Add `RCTMultipleImagePicker` to your iOS project.
 3. Add `libRCTMultipleImagePicker.a` to your `Link Binary with Libraries` section in `Build Phases` .
 4. Add `TZImagePickerController.bundle` to your `Resources` group and `Copy Bundle Resources` section in `Build Phases` .
 
 ### Android
 
-1. Run `npm install --save liaoyuan-io/react-native-multiple-image-picker` .
+1. Run `npm install --save react-native-multiple-image-picker` .
 2. Add `new MultipleImagePickerPackage()` to your `getPackages` return in `android/app/src/main/java/com/your/path/MainApplication.java`.
 3. Add following to your `android/app/src/main/AndroidManifest.xml`:
     ```
