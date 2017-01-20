@@ -48,6 +48,14 @@ RCT_EXPORT_METHOD(launchImageGallery:(NSDictionary *)options resolver:(RCTPromis
     }];
 }
 
+RCT_EXPORT_METHOD(getBase64String:(NSString *)input callback:(RCTResponseSenderBlock)callback){
+    NSURL *url = [[NSURL alloc] initWithString:input];
+    NSData *zipFileData = [NSData dataWithContentsOfFile:url];
+    NSString *base64String = [zipFileData base64EncodedStringWithOptions:0];
+    
+    callback(@[[NSNull null], base64String]);
+}
+
 #pragma mark TZImagePickerControllerDelegate
 
 - (void)showImagePickerController:(NSInteger)maxImagesCount selectedAssets:(NSMutableArray *)selectedAssets {
