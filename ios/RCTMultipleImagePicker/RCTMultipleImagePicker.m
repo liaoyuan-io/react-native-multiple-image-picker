@@ -48,6 +48,22 @@ RCT_EXPORT_METHOD(launchImageGallery:(NSDictionary *)options resolver:(RCTPromis
     }];
 }
 
+RCT_EXPORT_METHOD(getBase64StringFromArray:(NSArray *)inputs callback:(RCTResponseSenderBlock)callback){
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    
+    for (id object in inputs) {
+        NSString *input = object;
+        
+        NSURL *url = [[NSURL alloc] initWithString:input];
+        NSData *zipFileData = [NSData dataWithContentsOfFile:url];
+        NSString *base64String = [zipFileData base64EncodedStringWithOptions:0];
+        
+        [result addObject:base64String];
+    }
+    
+    callback(@[[NSNull null], result]);
+}
+
 RCT_EXPORT_METHOD(getBase64String:(NSString *)input callback:(RCTResponseSenderBlock)callback){
     NSURL *url = [[NSURL alloc] initWithString:input];
     NSData *zipFileData = [NSData dataWithContentsOfFile:url];
