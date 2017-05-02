@@ -35,12 +35,9 @@ RCT_EXPORT_METHOD(launchImageGallery:(NSDictionary *)options resolver:(RCTPromis
         [selectedAssets addObject:[self.assetsFromPath objectForKey:path]];
     }];
     
-  
-    NSError * error = nil;
-    
     [self checkPhotosPermissions:^(BOOL granted) {
         if (!granted) {
-          self.reject(@"error", @"Camera permissions not granted", error);
+          self.reject(@"access_denied", @"permissions not granted", nil);
           return;
         } else {
           [self showImagePickerController:maxImagesCount selectedAssets:selectedAssets];
@@ -102,8 +99,7 @@ RCT_EXPORT_METHOD(getBase64String:(NSString *)input callback:(RCTResponseSenderB
                                                attributes:nil
                                                     error:&error];
     if (error != nil) {
-        NSLog(@"error creating directory: %@", error);
-        self.reject(@"create_directory_failed", @"Fail to create directory.", error);
+        self.reject(@"create_directory_failed", @"Fail to create directory.", nil);
     }
     
     [photos enumerateObjectsUsingBlock:^(UIImage * _Nonnull image, NSUInteger index, BOOL * _Nonnull stop) {
