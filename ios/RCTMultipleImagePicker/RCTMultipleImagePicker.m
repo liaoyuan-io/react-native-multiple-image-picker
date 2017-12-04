@@ -34,10 +34,12 @@ RCT_EXPORT_METHOD(launchImageGallery:(NSDictionary *)options resolver:(RCTPromis
         NSString *path = [RCTConvert NSString:obj];
         [selectedAssets addObject:[self.assetsFromPath objectForKey:path]];
     }];
+  
+    NSError * error = nil;
     
     [self checkPhotosPermissions:^(BOOL granted) {
         if (!granted) {
-          self.reject(@"access_denied", @"permissions not granted", nil);
+          self.reject(@"camera_permission_not_granted", @"Camera permissions not granted", error);
           return;
         } else {
           [self showImagePickerController:maxImagesCount selectedAssets:selectedAssets];

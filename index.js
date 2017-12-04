@@ -1,8 +1,5 @@
-/**
- * Created by tshen on 16/6/20.
- */
 
-'use strict'
+'use strict';
 
 import { NativeModules } from 'react-native';
 
