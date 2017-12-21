@@ -34,7 +34,6 @@ RCT_EXPORT_METHOD(launchImageGallery:(NSDictionary *)options resolver:(RCTPromis
         NSString *path = [RCTConvert NSString:obj];
         [selectedAssets addObject:[self.assetsFromPath objectForKey:path]];
     }];
-    
   
     NSError * error = nil;
     
@@ -46,6 +45,30 @@ RCT_EXPORT_METHOD(launchImageGallery:(NSDictionary *)options resolver:(RCTPromis
           [self showImagePickerController:maxImagesCount selectedAssets:selectedAssets];
         }
     }];
+}
+
+RCT_EXPORT_METHOD(getBase64StringFromArray:(NSArray *)inputs callback:(RCTResponseSenderBlock)callback){
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    
+    for (id object in inputs) {
+        NSString *input = object;
+        
+        NSURL *url = [[NSURL alloc] initWithString:input];
+        NSData *zipFileData = [NSData dataWithContentsOfFile:url];
+        NSString *base64String = [zipFileData base64EncodedStringWithOptions:0];
+        
+        [result addObject:base64String];
+    }
+    
+    callback(@[[NSNull null], result]);
+}
+
+RCT_EXPORT_METHOD(getBase64String:(NSString *)input callback:(RCTResponseSenderBlock)callback){
+    NSURL *url = [[NSURL alloc] initWithString:input];
+    NSData *zipFileData = [NSData dataWithContentsOfFile:url];
+    NSString *base64String = [zipFileData base64EncodedStringWithOptions:0];
+    
+    callback(@[[NSNull null], base64String]);
 }
 
 #pragma mark TZImagePickerControllerDelegate
@@ -78,8 +101,7 @@ RCT_EXPORT_METHOD(launchImageGallery:(NSDictionary *)options resolver:(RCTPromis
                                                attributes:nil
                                                     error:&error];
     if (error != nil) {
-        NSLog(@"error creating directory: %@", error);
-        self.reject(@"create_directory_failed", @"Fail to create directory.", error);
+        self.reject(@"create_directory_failed", @"Fail to create directory.", nil);
     }
     
     [photos enumerateObjectsUsingBlock:^(UIImage * _Nonnull image, NSUInteger index, BOOL * _Nonnull stop) {
