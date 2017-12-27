@@ -8,45 +8,108 @@
 
 /* Begin PBXBuildFile section */
 		9C196D601FEC18720040A367 /* RCTMultipleImagePicker.h in Sources */ = {isa = PBXBuildFile; fileRef = 9F94BE921D187EF500602E33 /* RCTMultipleImagePicker.h */; };
-		9C196DC01FEC27FB0040A367 /* TZImagePickerController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C196D5D1FEC18540040A367 /* TZImagePickerController.framework */; };
+		9C3FED411FF36401009BC936 /* TZImagePickerController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C3FED401FF36401009BC936 /* TZImagePickerController.framework */; };
 		9F94BF341D18AAEC00602E33 /* RCTMultipleImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F94BE941D187EF500602E33 /* RCTMultipleImagePicker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9C196D561FEC18540040A367 /* PBXContainerItemProxy */ = {
+		9CAA39121FF368A300124EC3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9C196D4F1FEC18540040A367 /* TZImagePickerController.xcodeproj */;
+			containerPortal = 9CAA39011FF368A300124EC3 /* React.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 900E657C1C2BB8D5003D9A9E;
-			remoteInfo = TZImagePickerController;
+			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
+			remoteInfo = React;
 		};
-		9C196D581FEC18540040A367 /* PBXContainerItemProxy */ = {
+		9CAA39141FF368A300124EC3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9C196D4F1FEC18540040A367 /* TZImagePickerController.xcodeproj */;
+			containerPortal = 9CAA39011FF368A300124EC3 /* React.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 900E65951C2BB8D5003D9A9E;
-			remoteInfo = TZImagePickerControllerTests;
+			remoteGlobalIDString = 2D2A28131D9B038B00D4039D;
+			remoteInfo = "React-tvOS";
 		};
-		9C196D5A1FEC18540040A367 /* PBXContainerItemProxy */ = {
+		9CAA39161FF368A300124EC3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9C196D4F1FEC18540040A367 /* TZImagePickerController.xcodeproj */;
+			containerPortal = 9CAA39011FF368A300124EC3 /* React.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 900E65A01C2BB8D5003D9A9E;
-			remoteInfo = TZImagePickerControllerUITests;
+			remoteGlobalIDString = 3D3C059A1DE3340900C268FA;
+			remoteInfo = yoga;
 		};
-		9C196D5C1FEC18540040A367 /* PBXContainerItemProxy */ = {
+		9CAA39181FF368A300124EC3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9C196D4F1FEC18540040A367 /* TZImagePickerController.xcodeproj */;
+			containerPortal = 9CAA39011FF368A300124EC3 /* React.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 9F763A421FA071CF00D9E526;
-			remoteInfo = TZImagePickerControllerFramework;
+			remoteGlobalIDString = 3D3C06751DE3340C00C268FA;
+			remoteInfo = "yoga-tvOS";
 		};
-		9C196D5E1FEC186D0040A367 /* PBXContainerItemProxy */ = {
+		9CAA391A1FF368A300124EC3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9C196D4F1FEC18540040A367 /* TZImagePickerController.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 9F763A411FA071CF00D9E526;
-			remoteInfo = TZImagePickerControllerFramework;
+			containerPortal = 9CAA39011FF368A300124EC3 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D3CD9251DE5FBEC00167DC4;
+			remoteInfo = cxxreact;
+		};
+		9CAA391C1FF368A300124EC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CAA39011FF368A300124EC3 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D3CD9321DE5FBEE00167DC4;
+			remoteInfo = "cxxreact-tvOS";
+		};
+		9CAA391E1FF368A300124EC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CAA39011FF368A300124EC3 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D3CD90B1DE5FBD600167DC4;
+			remoteInfo = jschelpers;
+		};
+		9CAA39201FF368A300124EC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CAA39011FF368A300124EC3 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D3CD9181DE5FBD800167DC4;
+			remoteInfo = "jschelpers-tvOS";
+		};
+		9CAA39221FF368A300124EC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CAA39011FF368A300124EC3 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 139D7ECE1E25DB7D00323FB7;
+			remoteInfo = "third-party";
+		};
+		9CAA39241FF368A300124EC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CAA39011FF368A300124EC3 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D383D3C1EBD27B6005632C8;
+			remoteInfo = "third-party-tvOS";
+		};
+		9CAA39261FF368A300124EC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CAA39011FF368A300124EC3 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 139D7E881E25C6D100323FB7;
+			remoteInfo = "double-conversion";
+		};
+		9CAA39281FF368A300124EC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CAA39011FF368A300124EC3 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D383D621EBD27B9005632C8;
+			remoteInfo = "double-conversion-tvOS";
+		};
+		9CAA392A1FF368A300124EC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CAA39011FF368A300124EC3 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9936F3131F5F2E4B0010BF04;
+			remoteInfo = privatedata;
+		};
+		9CAA392C1FF368A300124EC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CAA39011FF368A300124EC3 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9936F32F1F5F2E5B0010BF04;
+			remoteInfo = "privatedata-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -55,7 +118,7 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
+			dstSubfolderSpec = 11;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -63,7 +126,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9C196D4F1FEC18540040A367 /* TZImagePickerController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TZImagePickerController.xcodeproj; path = TZImagePickerController/TZImagePickerController.xcodeproj; sourceTree = "<group>"; };
+		9C3FED401FF36401009BC936 /* TZImagePickerController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TZImagePickerController.framework; sourceTree = "<group>"; };
+		9CAA39011FF368A300124EC3 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		9F94BE921D187EF500602E33 /* RCTMultipleImagePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTMultipleImagePicker.h; sourceTree = "<group>"; };
 		9F94BE941D187EF500602E33 /* RCTMultipleImagePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTMultipleImagePicker.m; sourceTree = "<group>"; };
 		9F94BEEB1D18A40000602E33 /* libRCTMultipleImagePicker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTMultipleImagePicker.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,46 +138,41 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C196DC01FEC27FB0040A367 /* TZImagePickerController.framework in Frameworks */,
+				9C3FED411FF36401009BC936 /* TZImagePickerController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9C196D501FEC18540040A367 /* Products */ = {
+		9CAA39021FF368A300124EC3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9C196D571FEC18540040A367 /* TZImagePickerController.app */,
-				9C196D591FEC18540040A367 /* TZImagePickerControllerTests.xctest */,
-				9C196D5B1FEC18540040A367 /* TZImagePickerControllerUITests.xctest */,
-				9C196D5D1FEC18540040A367 /* TZImagePickerController.framework */,
+				9CAA39131FF368A300124EC3 /* libReact.a */,
+				9CAA39151FF368A300124EC3 /* libReact.a */,
+				9CAA39171FF368A300124EC3 /* libyoga.a */,
+				9CAA39191FF368A300124EC3 /* libyoga.a */,
+				9CAA391B1FF368A300124EC3 /* libcxxreact.a */,
+				9CAA391D1FF368A300124EC3 /* libcxxreact.a */,
+				9CAA391F1FF368A300124EC3 /* libjschelpers.a */,
+				9CAA39211FF368A300124EC3 /* libjschelpers.a */,
+				9CAA39231FF368A300124EC3 /* libthird-party.a */,
+				9CAA39251FF368A300124EC3 /* libthird-party.a */,
+				9CAA39271FF368A300124EC3 /* libdouble-conversion.a */,
+				9CAA39291FF368A300124EC3 /* libdouble-conversion.a */,
+				9CAA392B1FF368A300124EC3 /* libprivatedata.a */,
+				9CAA392D1FF368A300124EC3 /* libprivatedata-tvOS.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		9C196DBC1FEC27FB0040A367 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9C196DC11FEC29320040A367 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Products;
 			sourceTree = "<group>";
 		};
 		9F94BE671D187A7300602E33 = {
 			isa = PBXGroup;
 			children = (
-				9C196DC11FEC29320040A367 /* Products */,
+				9C3FED401FF36401009BC936 /* TZImagePickerController.framework */,
 				9F94BEEB1D18A40000602E33 /* libRCTMultipleImagePicker.a */,
 				9FA5B42C1D18E562007FE68B /* Libraries */,
 				9F94BE911D187EF500602E33 /* RCTMultipleImagePicker */,
-				9C196DBC1FEC27FB0040A367 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -129,7 +188,7 @@
 		9FA5B42C1D18E562007FE68B /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				9C196D4F1FEC18540040A367 /* TZImagePickerController.xcodeproj */,
+				9CAA39011FF368A300124EC3 /* React.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -148,7 +207,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				9C196D5F1FEC186D0040A367 /* PBXTargetDependency */,
 			);
 			name = RCTMultipleImagePicker;
 			productName = RCTMultipleImagePicker;
@@ -180,8 +238,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 9C196D501FEC18540040A367 /* Products */;
-					ProjectRef = 9C196D4F1FEC18540040A367 /* TZImagePickerController.xcodeproj */;
+					ProductGroup = 9CAA39021FF368A300124EC3 /* Products */;
+					ProjectRef = 9CAA39011FF368A300124EC3 /* React.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -192,32 +250,102 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		9C196D571FEC18540040A367 /* TZImagePickerController.app */ = {
+		9CAA39131FF368A300124EC3 /* libReact.a */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = TZImagePickerController.app;
-			remoteRef = 9C196D561FEC18540040A367 /* PBXContainerItemProxy */;
+			fileType = archive.ar;
+			path = libReact.a;
+			remoteRef = 9CAA39121FF368A300124EC3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		9C196D591FEC18540040A367 /* TZImagePickerControllerTests.xctest */ = {
+		9CAA39151FF368A300124EC3 /* libReact.a */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = TZImagePickerControllerTests.xctest;
-			remoteRef = 9C196D581FEC18540040A367 /* PBXContainerItemProxy */;
+			fileType = archive.ar;
+			path = libReact.a;
+			remoteRef = 9CAA39141FF368A300124EC3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		9C196D5B1FEC18540040A367 /* TZImagePickerControllerUITests.xctest */ = {
+		9CAA39171FF368A300124EC3 /* libyoga.a */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = TZImagePickerControllerUITests.xctest;
-			remoteRef = 9C196D5A1FEC18540040A367 /* PBXContainerItemProxy */;
+			fileType = archive.ar;
+			path = libyoga.a;
+			remoteRef = 9CAA39161FF368A300124EC3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		9C196D5D1FEC18540040A367 /* TZImagePickerController.framework */ = {
+		9CAA39191FF368A300124EC3 /* libyoga.a */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = TZImagePickerController.framework;
-			remoteRef = 9C196D5C1FEC18540040A367 /* PBXContainerItemProxy */;
+			fileType = archive.ar;
+			path = libyoga.a;
+			remoteRef = 9CAA39181FF368A300124EC3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9CAA391B1FF368A300124EC3 /* libcxxreact.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libcxxreact.a;
+			remoteRef = 9CAA391A1FF368A300124EC3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9CAA391D1FF368A300124EC3 /* libcxxreact.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libcxxreact.a;
+			remoteRef = 9CAA391C1FF368A300124EC3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9CAA391F1FF368A300124EC3 /* libjschelpers.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjschelpers.a;
+			remoteRef = 9CAA391E1FF368A300124EC3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9CAA39211FF368A300124EC3 /* libjschelpers.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjschelpers.a;
+			remoteRef = 9CAA39201FF368A300124EC3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9CAA39231FF368A300124EC3 /* libthird-party.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libthird-party.a";
+			remoteRef = 9CAA39221FF368A300124EC3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9CAA39251FF368A300124EC3 /* libthird-party.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libthird-party.a";
+			remoteRef = 9CAA39241FF368A300124EC3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9CAA39271FF368A300124EC3 /* libdouble-conversion.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libdouble-conversion.a";
+			remoteRef = 9CAA39261FF368A300124EC3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9CAA39291FF368A300124EC3 /* libdouble-conversion.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libdouble-conversion.a";
+			remoteRef = 9CAA39281FF368A300124EC3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9CAA392B1FF368A300124EC3 /* libprivatedata.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libprivatedata.a;
+			remoteRef = 9CAA392A1FF368A300124EC3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9CAA392D1FF368A300124EC3 /* libprivatedata-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libprivatedata-tvOS.a";
+			remoteRef = 9CAA392C1FF368A300124EC3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -234,23 +362,11 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		9C196D5F1FEC186D0040A367 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = TZImagePickerControllerFramework;
-			targetProxy = 9C196D5E1FEC186D0040A367 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
 		9F94BE6C1D187A7300602E33 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../node_modules/react-native/React/**",
-					"$(SRCROOT)/../../react-native/React/**",
-					"$(SRCROOT)/../Example/node_modules/react-native/React/**",
-				);
+				HEADER_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -260,11 +376,7 @@
 		9F94BE6D1D187A7300602E33 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../node_modules/react-native/React/**",
-					"$(SRCROOT)/../../react-native/React/**",
-					"$(SRCROOT)/../Example/node_modules/react-native/React/**",
-				);
+				HEADER_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -294,6 +406,10 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -309,10 +425,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../node_modules/react-native/React/**",
-					"$(SRCROOT)/../../react-native/React/**",
 					"$(inherited)/**",
-					"$(SRCROOT)/TZImagePickerController/**",
+					"$(SRCROOT)/../../react-native/React",
+					"$(SRCROOT)/../node_modules/react-native/React",
+					"$(SRCROOT)/TZImagePickerController.framework/Headers",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -347,6 +463,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -356,10 +476,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../node_modules/react-native/React/**",
-					"$(SRCROOT)/../../react-native/React/**",
 					"$(inherited)/**",
-					"$(SRCROOT)/TZImagePickerController/**",
+					"$(SRCROOT)/../../react-native/React",
+					"$(SRCROOT)/../node_modules/react-native/React",
+					"$(SRCROOT)/TZImagePickerController.framework/Headers",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
