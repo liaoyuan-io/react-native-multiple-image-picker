@@ -18,7 +18,7 @@ import java.util.Map;
 
 import cn.finalteam.rxgalleryfinal.RxGalleryFinal;
 import cn.finalteam.rxgalleryfinal.imageloader.ImageLoaderType;
-import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultSubscriber;
+import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
 import cn.finalteam.rxgalleryfinal.rxbus.event.ImageMultipleResultEvent;
 import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
 import cn.finalteam.rxgalleryfinal.bean.MediaBean;
@@ -69,7 +69,7 @@ public class MultipleImagePicker extends ReactContextBaseJavaModule {
         RxGalleryFinal rxGalleryFinal = RxGalleryFinal.with(getCurrentActivity()).image();
 
         if (single) {
-            rxGalleryFinal.radio().imageLoader(ImageLoaderType.PICASSO).subscribe(new RxBusResultSubscriber<ImageRadioResultEvent>() {
+            rxGalleryFinal.radio().imageLoader(ImageLoaderType.PICASSO).subscribe(new RxBusResultDisposable<ImageRadioResultEvent>() {
                 @Override
                 protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) throws Exception {
                     WritableArray paths = Arguments.createArray();
@@ -84,7 +84,7 @@ public class MultipleImagePicker extends ReactContextBaseJavaModule {
                     rxGalleryFinal.selected(this.getMediaBeanListFromPathList(selectedPaths));
                 }
             }
-            rxGalleryFinal.multiple().maxSize(maxImagesCount).imageLoader(ImageLoaderType.PICASSO).subscribe(new RxBusResultSubscriber<ImageMultipleResultEvent>() {
+            rxGalleryFinal.multiple().maxSize(maxImagesCount).imageLoader(ImageLoaderType.PICASSO).subscribe(new RxBusResultDisposable<ImageMultipleResultEvent>() {
                 @Override
                 protected void onEvent(ImageMultipleResultEvent imageMultipleResultEvent) throws Exception {
                     List<MediaBean> list = imageMultipleResultEvent.getResult();
