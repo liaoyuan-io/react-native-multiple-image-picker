@@ -18,6 +18,17 @@
 			name = "TZImagePickerController-Universal";
 			productName = "TZImagePickerController-Universal";
 		};
+		9CAD2A62203D3CCA00F93BF9 /* TZImagePickerController-Framework */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 9CAD2A64203D3CCA00F93BF9 /* Build configuration list for PBXAggregateTarget "TZImagePickerController-Framework" */;
+			buildPhases = (
+				9CAD2A63203D3CCA00F93BF9 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "TZImagePickerController-Framework";
+			productName = "TZImagePickerController-Universal";
+		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
@@ -273,9 +284,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		9F763A411FA071CF00D9E526 /* TZImagePickerController */ = {
+		9F763A411FA071CF00D9E526 /* TZImagePickerControllerFramework */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9F763A4D1FA071D000D9E526 /* Build configuration list for PBXNativeTarget "TZImagePickerController" */;
+			buildConfigurationList = 9F763A4D1FA071D000D9E526 /* Build configuration list for PBXNativeTarget "TZImagePickerControllerFramework" */;
 			buildPhases = (
 				9F763A3D1FA071CF00D9E526 /* Sources */,
 				9F763A3E1FA071CF00D9E526 /* Frameworks */,
@@ -286,7 +297,7 @@
 			);
 			dependencies = (
 			);
-			name = TZImagePickerController;
+			name = TZImagePickerControllerFramework;
 			productName = TZImagePickerControllerFramework;
 			productReference = 9F763A421FA071CF00D9E526 /* TZImagePickerController.framework */;
 			productType = "com.apple.product-type.framework";
@@ -302,6 +313,9 @@
 				TargetAttributes = {
 					9C81599D203D03C100F1133C = {
 						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					9CAD2A62203D3CCA00F93BF9 = {
 						ProvisioningStyle = Automatic;
 					};
 					9F763A411FA071CF00D9E526 = {
@@ -323,8 +337,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9F763A411FA071CF00D9E526 /* TZImagePickerController */,
+				9F763A411FA071CF00D9E526 /* TZImagePickerControllerFramework */,
 				9C81599D203D03C100F1133C /* TZImagePickerController-Universal */,
+				9CAD2A62203D3CCA00F93BF9 /* TZImagePickerController-Framework */,
 			);
 		};
 /* End PBXProject section */
@@ -352,7 +367,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "######################\n# Options\n######################\n\nREVEAL_ARCHIVE_IN_FINDER=true\n\nFRAMEWORK_NAME=\"${PROJECT_NAME}\"\n\nSIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${FRAMEWORK_NAME}.framework\"\n\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${FRAMEWORK_NAME}.framework\"\n\nUNIVERSAL_LIBRARY_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal\"\n\nFRAMEWORK=\"${UNIVERSAL_LIBRARY_DIR}/${FRAMEWORK_NAME}.framework\"\n\n\n######################\n# Build Frameworks\n######################\n\nxcodebuild -target ${PROJECT_NAME} BITCODE_GENERATION_MODE=bitcode ONLY_ACTIVE_ARCH=NO ENABLE_BITCODE=YES -scheme ${PROJECT_NAME} -sdk iphonesimulator -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphonesimulator 2>&1\n\nxcodebuild -target ${PROJECT_NAME} ONLY_ACTIVE_ARCH=NO ENABLE_BITCODE=YES BITCODE_GENERATION_MODE=bitcode -scheme ${PROJECT_NAME} -sdk iphoneos -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphoneos 2>&1\n\nopen \"${BUILD_DIR}\"\n######################\n# Create directory for universal\n######################\n\nrm -rf \"${UNIVERSAL_LIBRARY_DIR}\"\n\nmkdir \"${UNIVERSAL_LIBRARY_DIR}\"\n\nmkdir \"${FRAMEWORK}\"\n\n\n######################\n# Copy files Framework\n######################\n\ncp -r \"${DEVICE_LIBRARY_PATH}/.\" \"${FRAMEWORK}\"\n\n\n######################\n# Make an universal binary\n######################\n\nlipo \"${SIMULATOR_LIBRARY_PATH}/${FRAMEWORK_NAME}\" \"${DEVICE_LIBRARY_PATH}/${FRAMEWORK_NAME}\" -create -output \"${FRAMEWORK}/${FRAMEWORK_NAME}\" | echo\n\n\n######################\n# On Release, copy the result to release directory\n######################\nOUTPUT_DIR=\"${PROJECT_DIR}/\"\n\ncp -r \"${FRAMEWORK}\" \"$OUTPUT_DIR\"\n\nif [ ${REVEAL_ARCHIVE_IN_FINDER} = true ]; then\nopen \"${OUTPUT_DIR}/\"\nfi\n";
+			shellScript = "######################\n# Options\n######################\n\nREVEAL_ARCHIVE_IN_FINDER=true\n\nFRAMEWORK_NAME=\"${PROJECT_NAME}\"\n\nSIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${FRAMEWORK_NAME}.framework\"\n\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${FRAMEWORK_NAME}.framework\"\n\nUNIVERSAL_LIBRARY_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal\"\n\nFRAMEWORK=\"${UNIVERSAL_LIBRARY_DIR}/${FRAMEWORK_NAME}.framework\"\n\n\n######################\n# Build Frameworks\n######################\n\nxcodebuild -target ${PROJECT_NAME} BITCODE_GENERATION_MODE=bitcode ONLY_ACTIVE_ARCH=NO ENABLE_BITCODE=YES -scheme ${PROJECT_NAME} -sdk iphonesimulator -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphonesimulator 2>&1\n\nxcodebuild -target ${PROJECT_NAME} ONLY_ACTIVE_ARCH=NO ENABLE_BITCODE=YES BITCODE_GENERATION_MODE=bitcode -scheme ${PROJECT_NAME} -sdk iphoneos -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphoneos 2>&1\n\ncp -r \"${FRAMEWORK}\" \"$OUTPUT_DIR\"\n\n######################\n# Create directory for universal\n######################\n\nrm -rf \"${UNIVERSAL_LIBRARY_DIR}\"\n\nmkdir \"${UNIVERSAL_LIBRARY_DIR}\"\n\nmkdir \"${FRAMEWORK}\"\n\n\n######################\n# Copy files Framework\n######################\n\ncp -r \"${DEVICE_LIBRARY_PATH}/.\" \"${FRAMEWORK}\"\n\n\n######################\n# Make an universal binary\n######################\n\nlipo \"${SIMULATOR_LIBRARY_PATH}/${FRAMEWORK_NAME}\" \"${DEVICE_LIBRARY_PATH}/${FRAMEWORK_NAME}\" -create -output \"${FRAMEWORK}/${FRAMEWORK_NAME}\" | echo\n\n\n######################\n# On Release, copy the result to release directory\n######################\nOUTPUT_DIR=\"${PROJECT_DIR}/\"\n\ncp -r \"${FRAMEWORK}\" \"$OUTPUT_DIR\"\n\nif [ ${REVEAL_ARCHIVE_IN_FINDER} = true ]; then\nopen \"${OUTPUT_DIR}/\"\nfi\n";
+		};
+		9CAD2A63203D3CCA00F93BF9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "######################\n# Options\n######################\n\nREVEAL_ARCHIVE_IN_FINDER=true\n\nTARGET_NAME=\"${PROJECT_NAME}Framework\"\nFRAMEWORK_NAME=\"${PROJECT_NAME}\"\n\nSIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${FRAMEWORK_NAME}.framework\"\n\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${FRAMEWORK_NAME}.framework\"\n\nSIMULATOR_FRAMEWORK_PATH=\"${PROJECT_DIR}/${FRAMEWORK_NAME}-iphonesimulator.framework\"\n\nDEVICE_FRAMEWORK_PATH=\"${PROJECT_DIR}/${FRAMEWORK_NAME}-iphoneos.framework\"\n\n######################\n# Build Frameworks\n######################\n\nrm -rf \"${SIMULATOR_FRAMEWORK_PATH}\"\nxcodebuild -target ${TARGET_NAME} ONLY_ACTIVE_ARCH=NO -scheme ${TARGET_NAME} -sdk iphonesimulator -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphonesimulator 2>&1\ncp -r \"${SIMULATOR_LIBRARY_PATH}\" \"${SIMULATOR_FRAMEWORK_PATH}\"\n\n\nrm -rf \"${DEVICE_FRAMEWORK_PATH}\"\nxcodebuild -target ${TARGET_NAME} ONLY_ACTIVE_ARCH=NO ENABLE_BITCODE=YES BITCODE_GENERATION_MODE=bitcode -scheme ${TARGET_NAME} -sdk iphoneos -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphoneos 2>&1\ncp -r \"${DEVICE_LIBRARY_PATH}\" \"${DEVICE_FRAMEWORK_PATH}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -496,6 +524,22 @@
 			};
 			name = Release;
 		};
+		9CAD2A65203D3CCA00F93BF9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9CAD2A66203D3CCA00F93BF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		9F763A4B1FA071D000D9E526 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -598,7 +642,16 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9F763A4D1FA071D000D9E526 /* Build configuration list for PBXNativeTarget "TZImagePickerController" */ = {
+		9CAD2A64203D3CCA00F93BF9 /* Build configuration list for PBXAggregateTarget "TZImagePickerController-Framework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9CAD2A65203D3CCA00F93BF9 /* Debug */,
+				9CAD2A66203D3CCA00F93BF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9F763A4D1FA071D000D9E526 /* Build configuration list for PBXNativeTarget "TZImagePickerControllerFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9F763A4B1FA071D000D9E526 /* Debug */,

@@ -196,6 +196,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9F94BEF11D18A40000602E33 /* Build configuration list for PBXNativeTarget "RCTMultipleImagePicker" */;
 			buildPhases = (
+				9CAD2AD6203D493100F93BF9 /* ShellScript */,
 				9F94BEE71D18A40000602E33 /* Sources */,
 				9F94BEE81D18A40000602E33 /* Frameworks */,
 			);
@@ -345,6 +346,22 @@
 		};
 /* End PBXReferenceProxy section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		9CAD2AD6203D493100F93BF9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FRAMEWORK_NAME=\"TZImagePickerController\"\nSIMULATOR_FRAMEWORK_PATH=\"${PROJECT_DIR}/${FRAMEWORK_NAME}/${FRAMEWORK_NAME}-iphonesimulator.framework\"\n\nDEVICE_FRAMEWORK_PATH=\"${PROJECT_DIR}/${FRAMEWORK_NAME}/${FRAMEWORK_NAME}-iphoneos.framework\"\n\nFRAMEWORK_PATH=\"${PROJECT_DIR}/${FRAMEWORK_NAME}/${FRAMEWORK_NAME}.framework\"\n\nrm -rf \"${FRAMEWORK_PATH}\"\n\nif [ ${PLATFORM_NAME} = \"iphonesimulator\" ]\nthen\ncp -r \"${SIMULATOR_FRAMEWORK_PATH}\" \"${FRAMEWORK_PATH}\"\nelse\ncp -r \"${DEVICE_FRAMEWORK_PATH}\" \"${FRAMEWORK_PATH}\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9F94BEE71D18A40000602E33 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -365,6 +382,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -375,6 +393,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -404,7 +423,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/TZImagePickerController/",
+					"$(PROJECT_DIR)/TZImagePickerController/**",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -462,7 +481,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/TZImagePickerController/",
+					"$(PROJECT_DIR)/TZImagePickerController/**",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
