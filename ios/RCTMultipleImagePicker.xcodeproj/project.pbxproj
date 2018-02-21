@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9C196D601FEC18720040A367 /* RCTMultipleImagePicker.h in Sources */ = {isa = PBXBuildFile; fileRef = 9F94BE921D187EF500602E33 /* RCTMultipleImagePicker.h */; };
-		9C3FED411FF36401009BC936 /* TZImagePickerController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C3FED401FF36401009BC936 /* TZImagePickerController.framework */; };
+		9C8159A7203D053700F1133C /* TZImagePickerController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C8159A3203D051E00F1133C /* TZImagePickerController.framework */; };
 		9F94BF341D18AAEC00602E33 /* RCTMultipleImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F94BE941D187EF500602E33 /* RCTMultipleImagePicker.m */; };
 /* End PBXBuildFile section */
 
@@ -113,20 +113,8 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		9F94BEE91D18A40000602E33 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 11;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		9C3FED401FF36401009BC936 /* TZImagePickerController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TZImagePickerController.framework; sourceTree = "<group>"; };
+		9C8159A3203D051E00F1133C /* TZImagePickerController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TZImagePickerController.framework; path = TZImagePickerController/TZImagePickerController.framework; sourceTree = SOURCE_ROOT; };
 		9CAA39011FF368A300124EC3 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		9F94BE921D187EF500602E33 /* RCTMultipleImagePicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTMultipleImagePicker.h; sourceTree = "<group>"; };
 		9F94BE941D187EF500602E33 /* RCTMultipleImagePicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTMultipleImagePicker.m; sourceTree = "<group>"; };
@@ -138,13 +126,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C3FED411FF36401009BC936 /* TZImagePickerController.framework in Frameworks */,
+				9C8159A7203D053700F1133C /* TZImagePickerController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9C8159A6203D053700F1133C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9CAA39021FF368A300124EC3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,10 +164,11 @@
 		9F94BE671D187A7300602E33 = {
 			isa = PBXGroup;
 			children = (
-				9C3FED401FF36401009BC936 /* TZImagePickerController.framework */,
+				9C8159A3203D051E00F1133C /* TZImagePickerController.framework */,
 				9F94BEEB1D18A40000602E33 /* libRCTMultipleImagePicker.a */,
 				9FA5B42C1D18E562007FE68B /* Libraries */,
 				9F94BE911D187EF500602E33 /* RCTMultipleImagePicker */,
+				9C8159A6203D053700F1133C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -202,7 +198,6 @@
 			buildPhases = (
 				9F94BEE71D18A40000602E33 /* Sources */,
 				9F94BEE81D18A40000602E33 /* Frameworks */,
-				9F94BEE91D18A40000602E33 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -409,6 +404,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/TZImagePickerController/",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -428,7 +424,7 @@
 					"$(inherited)/**",
 					"$(SRCROOT)/../../react-native/React",
 					"$(SRCROOT)/../node_modules/react-native/React",
-					"$(SRCROOT)/TZImagePickerController.framework/Headers",
+					"$(SRCROOT)/TZImagePickerController/TZImagePickerController.framework/Headers",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -466,6 +462,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/TZImagePickerController/",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -479,7 +476,7 @@
 					"$(inherited)/**",
 					"$(SRCROOT)/../../react-native/React",
 					"$(SRCROOT)/../node_modules/react-native/React",
-					"$(SRCROOT)/TZImagePickerController.framework/Headers",
+					"$(SRCROOT)/TZImagePickerController/TZImagePickerController.framework/Headers",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

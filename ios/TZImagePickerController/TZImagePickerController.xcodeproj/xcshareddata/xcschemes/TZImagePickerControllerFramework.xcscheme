@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9F763A411FA071CF00D9E526"
                BuildableName = "TZImagePickerController.framework"
-               BlueprintName = "TZImagePickerControllerFramework"
+               BlueprintName = "TZImagePickerController"
                ReferencedContainer = "container:TZImagePickerController.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -49,7 +49,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9F763A411FA071CF00D9E526"
             BuildableName = "TZImagePickerController.framework"
-            BlueprintName = "TZImagePickerControllerFramework"
+            BlueprintName = "TZImagePickerController"
             ReferencedContainer = "container:TZImagePickerController.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -67,7 +67,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9F763A411FA071CF00D9E526"
             BuildableName = "TZImagePickerController.framework"
-            BlueprintName = "TZImagePickerControllerFramework"
+            BlueprintName = "TZImagePickerController"
             ReferencedContainer = "container:TZImagePickerController.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
