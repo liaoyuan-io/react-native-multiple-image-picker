@@ -21,6 +21,7 @@
 
 @property (nonatomic, strong) RCTPromiseResolveBlock resolve;
 @property (nonatomic, strong) RCTPromiseRejectBlock reject;
+@property (nonatomic, strong) TZImagePickerController *imagePickerController;
 
 @property (nonatomic, strong) NSMutableDictionary *assetsFromPath;
 @property (nonatomic, strong) NSMutableDictionary *assetsToPath;

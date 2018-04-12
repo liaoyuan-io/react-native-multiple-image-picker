@@ -47,6 +47,12 @@ RCT_EXPORT_METHOD(launchImageGallery:(NSDictionary *)options resolver:(RCTPromis
     }];
 }
 
+RCT_EXPORT_METHOD(close) {
+    if(self.imagePickerController !=nil) {
+        [self.imagePickerController cancelButtonClick];
+    }
+}
+
 RCT_EXPORT_METHOD(getBase64StringFromArray:(NSArray *)inputs callback:(RCTResponseSenderBlock)callback){
     NSMutableArray *result = [[NSMutableArray alloc] init];
     
@@ -74,13 +80,13 @@ RCT_EXPORT_METHOD(getBase64String:(NSString *)input callback:(RCTResponseSenderB
 #pragma mark TZImagePickerControllerDelegate
 
 - (void)showImagePickerController:(NSInteger)maxImagesCount selectedAssets:(NSMutableArray *)selectedAssets {
-  TZImagePickerController *imagePickerController = [[TZImagePickerController alloc] initWithMaxImagesCount:maxImagesCount delegate:self];
-  imagePickerController.allowPickingOriginalPhoto = NO;
-  imagePickerController.allowPickingVideo = NO;
-  imagePickerController.selectedAssets = selectedAssets;
+  self.imagePickerController = [[TZImagePickerController alloc] initWithMaxImagesCount:maxImagesCount delegate:self];
+  self.imagePickerController.allowPickingOriginalPhoto = NO;
+  self.imagePickerController.allowPickingVideo = NO;
+  self.imagePickerController.selectedAssets = selectedAssets;
   dispatch_async(dispatch_get_main_queue(), ^{
     UIViewController *root = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-    [root presentViewController:imagePickerController
+    [root presentViewController:self.imagePickerController
           animated:YES
           completion:NULL];
   });
